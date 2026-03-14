@@ -1,0 +1,15 @@
+[user]
+    email = "axel@ramge.de"
+[core]
+    editor = "emacsclient -t"
+    excludesfile = ~/.config/git/ignore
+    autocrlf = input
+
+[pull]
+    rebase = true
+
+[init]
+    defaultBranch = main
+
+[include]
+    path = ~/.gitconfig.local

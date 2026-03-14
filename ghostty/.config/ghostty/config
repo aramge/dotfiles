@@ -1,0 +1,19 @@
+# Schrift & Größe (Exakt wie Terminal.app)
+font-family = "Menlo"
+font-size = 18
+
+# Fenstergröße
+window-width = 120
+window-height = 40
+
+# --- DEIN FIX ---
+# Linke Option-Taste = Meta (für Emacs/tmux)
+# Rechte Option-Taste = macOS Standard (für @, |, ~, etc.)
+macos-option-as-alt = left
+
+# Optik (KISS)
+background = #ffffff
+foreground = #000000
+window-padding-x = 15
+window-padding-y = 15
+window-decoration = true
