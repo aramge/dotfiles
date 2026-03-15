@@ -22,6 +22,7 @@
 **/transient/
 **/tramp
 **/request/
+**/org-persist/
 **/.#*
 **/bookmarks
 **/custom.el
@@ -29,5 +30,5 @@
 # Zsh-Spezifisches
 **/.zsh_sessions/
 **/.zsh_history
-**/.zsh_zcompdump
+**/.zcompdump
 zsh/.config/zsh/.zsh_history

@@ -8,5 +8,6 @@ setopt APPEND_HISTORY
 setopt SHARE_HISTORY
 setopt GLOB_STAR_SHORT
 setopt PROMPT_SUBST
+setopt INTERACTIVE_COMMENTS
 
 bindkey -e
