@@ -1,10 +1,13 @@
 import XMonad
+import XMonad.Hooks.DynamicLog
 import XMonad.Util.EZConfig (additionalKeysP)
 
-main = xmonad $ def
-    { modMask = mod4Mask } -- Command/Windows als Mod-Key
+main = xmonad =<< xmobar (def
+    { modMask           = mod4Mask  -- Command/Windows als Mod-Key
+    , terminal          = "ghostty"
+    , focusFollowsMouse = True
+    }
     `additionalKeysP`
-    [ ("M-S-p", spawn "maim ~/screenshot.png")
+    [ ("M-S-ü", spawn "maim -s | xclip -selection clipboard -t image/png")
     , ("M-p",   spawn "rofi -show drun")
-    ]
-
+    ])
