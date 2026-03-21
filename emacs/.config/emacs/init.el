@@ -21,6 +21,22 @@
 (global-auto-revertmode t)
 (setq global-auto-revert-non-file-buffers t)
 
+(defun my-copy-to-clipboard (text)
+  (let ((process-connection-type nil))
+    (cond
+     ;; macOS
+     ((executable-find "pbcopy")
+      (let ((proc (start-process "pbcopy" nil "pbcopy")))
+        (process-send-string proc text)
+        (process-send-eof proc)))
+     ;; NixOS / Linux (setzt xclip voraus)
+     ((executable-find "xclip")
+      (let ((proc (start-process "xclip" nil "xclip" "-selection" "clipboard" "-i")))
+        (process-send-string proc text)
+        (process-send-eof proc))))))
+
+(setq interprogram-cut-function 'my-copy-to-clipboard)
+
 (setq ispell-program-name "hunspell")
 (setq ispell-dictionary "de_DE")
 

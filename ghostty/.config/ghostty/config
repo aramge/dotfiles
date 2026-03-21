@@ -11,6 +11,8 @@ window-height = 40
 # Rechte Option-Taste = macOS Standard (für @, |, ~, etc.)
 macos-option-as-alt = left
 
+clipboard-write = allow
+
 # Optik (KISS)
 background = #ffffff
 foreground = #000000
