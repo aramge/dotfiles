@@ -18,6 +18,9 @@
 (setq word-wrap t)
 (global-visual-line-mode 1)
 
+(global-auto-revertmode t)
+(setq global-auto-revert-non-file-buffers t)
+
 (setq ispell-program-name "hunspell")
 (setq ispell-dictionary "de_DE")
 
