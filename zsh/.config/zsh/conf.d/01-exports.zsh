@@ -1,23 +1,16 @@
-# Universelle Basispfade
+# Nur private Pfade hinzufügen, das OS liefert den Rest
 path=(
   $HOME/bin
-  /usr/local/bin
-  /usr/local/sbin
-  /usr/bin
-  /bin
-  /usr/sbin
-  /sbin
   $path
 )
 export PATH
 
-export EDITOR='vim'
-export VISUAL='vim'
+export EDITOR='emacsclient -t -a ""'
+export VISUAL='emacsclient -t -a ""'
 
 # Lokalisierung
 export LANG=en_US.UTF-8
 export LC_MESSAGES=en_US.UTF-8
 export LC_CTYPE=de_DE.UTF-8
 
-# Spezieller Editor für sudoedit (nutzt deinen Emacs-Alias)
 export SUDO_EDITOR='emacsclient -t -a ""'
