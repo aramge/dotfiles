@@ -18,8 +18,8 @@
 (setq word-wrap t)
 (global-visual-line-mode 1)
 
-(global-auto-revertmode t)
-(setq global-auto-revert-non-file-buffers t)
+;;;(global-auto-revertmode t)
+;;;(setq global-auto-revert-non-file-buffers t)
 
 (defun my-copy-to-clipboard (text)
   (let ((process-connection-type nil))
