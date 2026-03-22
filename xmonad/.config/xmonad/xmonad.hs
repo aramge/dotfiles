@@ -14,7 +14,7 @@ main = xmonad . ewmhFullscreen . ewmh =<< xmobar (def
     , focusFollowsMouse = False
 
     -- Das optische Tuning: Tahoe-Style
-    , borderWidth       = 3                    -- Dreimal so dick wie vorher
+    , borderWidth       = 5                    -- Dreimal so dick wie vorher
     , focusedBorderColor= "#E58C7A"            -- Tahoe-Rot (Sanftes Koralle/Ziegelrot)
     , normalBorderColor = "#2B3A42"            -- Tahoe-Dunkelblau/Tiefseegrau
 

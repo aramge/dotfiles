@@ -1,0 +1,25 @@
+/* Scrollbar Breite reduzieren */
+scrollbar, scrollbar button, scrollbar slider {
+    background-color: transparent;
+    border: none;
+}
+
+scrollbar slider {
+    /* Tahoe-Dunkelblau passend zu deinen XMonad-Bordern */
+    background-color: #2B3A42;
+    min-width: 4px;
+    min-height: 4px;
+    border-radius: 5px;
+    margin: 2px;
+}
+
+/* Dezent aufhellen beim Drüberfahren */
+scrollbar slider:hover {
+    background-color: #E58C7A;
+}
+
+/* Hintergrund des Balkens entfernen */
+scrollbar trough {
+    background-color: transparent;
+    border: none;
+}
