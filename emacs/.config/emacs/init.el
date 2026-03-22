@@ -37,6 +37,15 @@
 
 (setq interprogram-cut-function 'my-copy-to-clipboard)
 
+(defun my-paste-from-clipboard ()
+  (cond
+   ((executable-find "pbpaste")
+    (shell-command-to-string "pbpaste"))
+   ((executable-find "xclip")
+    (shell-command-to-string "xclip -o -selection clipboard"))))
+
+(setq interprogram-paste-function 'my-paste-from-clipboard)
+
 (setq ispell-program-name "hunspell")
 (setq ispell-dictionary "de_DE")
 
