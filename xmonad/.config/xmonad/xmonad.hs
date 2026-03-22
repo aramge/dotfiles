@@ -5,6 +5,7 @@ import XMonad.Hooks.EwmhDesktops (ewmh, ewmhFullscreen)
 
 -- Neu für die stabile Platzierung
 import XMonad.Actions.SpawnOn (spawnOn, manageSpawn)
+import XMonad.Util.SpawnOnce (spawnOnce, spawnOnOnce)
 
 import XMonad.Layout.MultiToggle (mkToggle, single, Toggle(..))
 import XMonad.Layout.MultiToggle.Instances (StdTransformers(NBFULL))
@@ -12,7 +13,7 @@ import XMonad.Hooks.ManageDocks (ToggleStruts(..))
 
 myManageHook :: ManageHook
 myManageHook = composeAll
-    [ manageSpawn -- WICHTIG: Erlaubt spawnOn seine Arbeit zu tun
+    [ manageSpawn -- WICHTIG: Erlaubt spawnOn/spawnOnOnce seine Arbeit zu tun
     , className =? "keepassxc"        --> doShift "1"
     , className =? "chromium-browser" --> doShift "1"
     ]
@@ -20,13 +21,13 @@ myManageHook = composeAll
 myStartupHook :: X ()
 myStartupHook = do
     -- DPI fixen
-    spawn "fix-dpi"
+    spawnOnce "fix-dpi"
     -- Programme direkt auf Workspaces zwingen
-    spawnOn "1" "keepassxc"
-    spawnOn "1" "ghostty --title=ghostty-1"
-    spawnOn "1" "chromium"
-    spawnOn "2" "ghostty --title=ghostty-2"
-    spawnOn "3" "ghostty --title=ghostty-3"
+    spawnOnOnce "1" "keepassxc"
+    spawnOnOnce "1" "ghostty --title=ghostty-1"
+    spawnOnOnce "1" "chromium"
+    spawnOnOnce "2" "ghostty --title=ghostty-2"
+    spawnOnOnce "3" "ghostty --title=ghostty-3"
 
 main :: IO ()
 main = xmonad . ewmhFullscreen . ewmh =<< xmobar (def
