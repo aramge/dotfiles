@@ -1,4 +1,3 @@
-alias sha256="shasum -a 256"
 alias jail='echo "STOPP: Nutze stattdessen -> service jail [start|stop|restart] <name>"'
 alias vi='vim'
 alias e='emacsclient -t -a ""'

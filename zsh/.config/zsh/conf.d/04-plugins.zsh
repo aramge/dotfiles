@@ -1,12 +1,10 @@
-PLUGIN_PATHS=("/opt/homebrew/share" "/usr/local/share" "/usr/share")
-
-for base in "${PLUGIN_PATHS[@]}"; do
-  [ -f "$base/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && source "$base/zsh-autosuggestions/zsh-autosuggestions.zsh"
-  [ -f "$base/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source "$base/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-done
-
-if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+# NixOS/nix-darwin verwalten Plugins nativ.
+# Fallback-Sourcing nur für Debian und FreeBSD:
+if [[ ! -d /nix ]]; then
+  for base in "/usr/local/share" "/usr/share"; do
+    [ -f "$base/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && source "$base/zsh-autosuggestions/zsh-autosuggestions.zsh"
+    [ -f "$base/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source "$base/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+  done
 fi
 
 autoload -Uz compinit

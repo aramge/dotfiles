@@ -1,16 +1,16 @@
-# Nur private Pfade hinzufügen, das OS liefert den Rest
+# Pfad-Handling: Einzigartige Einträge (U) und automatische Bindung an $PATH
+typeset -U path
 path=(
-  $HOME/bin
+  $HOME/.local/bin
   $path
 )
-export PATH
 
+# Editor-Setup
 export EDITOR='emacsclient -t -a ""'
-export VISUAL='emacsclient -t -a ""'
+export VISUAL="$EDITOR"
+export SUDO_EDITOR="$EDITOR"
 
-# Lokalisierung
+# Lokalisierung (Mixed-Setup: US-System, DE-Formatierung)
 export LANG=en_US.UTF-8
 export LC_MESSAGES=en_US.UTF-8
 export LC_CTYPE=de_DE.UTF-8
-
-export SUDO_EDITOR='emacsclient -t -a ""'
