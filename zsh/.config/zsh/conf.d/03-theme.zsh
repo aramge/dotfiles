@@ -1,14 +1,21 @@
 autoload -U colors && colors
 
 function git_prompt_info() {
+  # Schneller Abbruch, wenn kein Git-Repo oder kein Branch vorhanden
+  git rev-parse --is-inside-work-tree &>/dev/null || return
   local ref=$(git symbolic-ref HEAD 2> /dev/null) || return
   local branch=${ref#refs/heads/}
-  local ahead=$(git rev-list --count @{u}..HEAD 2>/dev/null || echo 0)
-  local behind=$(git rev-list --count HEAD..@{u} 2>/dev/null || echo 0)
 
+  # Upstream-Check (KISS: Verhindert Fehlermeldungen bei fehlendem Remote)
+  local upstream=$(git rev-parse --abbrev-ref @{u} 2>/dev/null)
   local status_info=""
-  [ "$ahead" -gt 0 ] && status_info+="↑${ahead}"
-  [ "$behind" -gt 0 ] && status_info+="↓${behind}"
+  
+  if [[ -n "$upstream" ]]; then
+    local ahead=$(git rev-list --count @{u}..HEAD 2>/dev/null || echo 0)
+    local behind=$(git rev-list --count HEAD..@{u} 2>/dev/null || echo 0)
+    [ "$ahead" -gt 0 ] && status_info+="↑${ahead}"
+    [ "$behind" -gt 0 ] && status_info+="↓${behind}"
+  fi
 
   echo "%{$fg[blue]%}git:(${branch}${status_info})%{$reset_color%}"
 }
