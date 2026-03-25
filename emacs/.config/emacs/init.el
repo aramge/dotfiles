@@ -61,6 +61,8 @@
       kept-old-versions 2
       version-control t)
 
+(setq dired-dwim-target t)
+
 ;; --- Paket-Management & Bootstrapping ---
 (require 'package)
 (setq package-archives
