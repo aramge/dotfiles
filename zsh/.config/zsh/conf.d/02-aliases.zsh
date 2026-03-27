@@ -1,6 +1,6 @@
-alias jail='echo "STOPP: Nutze stattdessen -> service jail [start|stop|restart] <name>"'
-alias vi='vim'
 alias e='emacsclient -t -a ""'
-alias ssh='TERM=xterm-256color ssh'
-
+alias jail='echo "STOPP: Nutze stattdessen -> service jail [start|stop|restart] <name>"'
 alias se='sudo -e'
+alias ssh='TERM=xterm-256color ssh'
+alias todo='emacsclient -t -a ~/sync/gh/todo/todo.org'
+alias vi='vim'

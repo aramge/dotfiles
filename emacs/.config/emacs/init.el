@@ -61,7 +61,31 @@
       kept-old-versions 2
       version-control t)
 
+(setq dired-kill-when-opening-new-dired-buffer t)
 (setq dired-dwim-target t)
+(with-eval-after-load 'dired
+  (defvar dired-external-extensions
+    '("pdf"
+      ;; LibreOffice / Microsoft Office
+      "doc" "docx" "xls" "xlsm" "xlsx" "odt" "ods" "csv"
+      ;; Bilder
+      "jpg" "jpeg" "png" "gif" "svg" "webp"
+      ;; Audio / Video
+      "mp3" "mp4" "mkv" "avi")
+    "Liste der Dateiendungen, die an das Betriebssystem übergeben werden.")
+
+  (defun dired-ret-external-or-emacs ()
+    "Öffnet definierte Dateien über xdg-open/open, den Rest in Emacs."
+    (interactive)
+    (let* ((file (dired-get-file-for-visit))
+           (ext (file-name-extension file)))
+      ;; file-regular-p entspricht exakt 'find -type f'
+      (if (and ext (file-regular-p file) (member (downcase ext) dired-external-extensions))
+          (let ((cmd (if (eq system-type 'darwin) "open" "xdg-open")))
+            (call-process cmd nil 0 nil file))
+        (dired-find-file))))
+
+  (define-key dired-mode-map (kbd "RET") #'dired-ret-external-or-emacs))
 
 ;; --- Paket-Management & Bootstrapping ---
 (require 'package)
@@ -87,6 +111,11 @@
 (server-start)
 
 ;; --- Pakete ---
+(use-package which-key
+  :ensure t
+  :config
+  (which-key-mode))
+
 (use-package clipetty)
 (use-package smartparens
   :hook (prog-mode . smartparens-mode)
@@ -131,11 +160,29 @@
          ("C-c c" . org-capture))
   :config
   (setq org-directory "~/sync/gh/notes")
-  (setq org-agenda-files (list org-directory))
+  (setq org-agenda-files '("~/sync/gh/todo/todo.org"))
   (setq org-log-done 'time))
 
-(use-package org-modern
-  :hook (org-mode . org-modern-mode))
+;;;(use-package org-modern
+;;;  :hook (org-mode . org-modern-mode))
+
+(setq org-default-priority ?C)
+(setq org-agenda-custom-commands
+      '(("e" "Eisenhower Matrix"
+         ((tags-todo "+PRIORITY=\"A\"+TODO=\"NEXT\""
+                     ((org-agenda-overriding-header "Quadrant A: Dringend & Wichtig (NEXT)")))
+          (tags-todo "+PRIORITY=\"B\"+TODO=\"TODO\""
+                     ((org-agenda-overriding-header "Quadrant B: Wichtig & Geplant (TODO + SCHEDULED)")))
+          (tags-todo "+PRIORITY=\"C\"+TODO=\"TODO\""
+                     ((org-agenda-overriding-header "Quadrant C: Dringend & Unwichtig (TODO ohne Prio oder [#C])")))
+          (todo "SOMEDAY"
+                ((org-agenda-overriding-header "Quadrant D: Weder noch (SOMEDAY)")))))))
+;(setq org-agenda-hide-tags-regexp ".*") ; Versteckt alle Tags in der Agenda-Ansicht
+(setq org-agenda-prefix-format
+      '((agenda . " %i %-12:c%?-12t% s")
+        (todo   . " ") ; Entfernt das "todo:" Präfix für mehr Platz
+        (tags   . " ")
+        (search . " ")))
 
 (use-package eglot
   :ensure nil
