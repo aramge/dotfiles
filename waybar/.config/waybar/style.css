@@ -1,3 +1,12 @@
+/* Catppuccin Mocha Palette - Single Source of Truth für Waybar */
+@define-color base #1e1e2e;
+@define-color text #cdd6f4;
+@define-color surface1 #45475a;
+@define-color red #f38ba8;
+@define-color green #a6e3a1;
+@define-color yellow #f9e2af;
+@define-color blue #89b4fa;
+
 /* Globales Reset und Schrift-Setup */
 * {
     border: none;
@@ -9,8 +18,8 @@
 
 /* Die gesamte Leiste (entspricht bgColor und position in xmobar) */
 window#waybar {
-    background: black;
-    color: lightgrey;
+    background: @base;
+    color: @text;
     transition-property: background-color;
     transition-duration: .5s;
 }
@@ -22,20 +31,20 @@ window#waybar {
 
 /* Warnzustand für CPU (entspricht --high red) */
 #cpu.high {
-    color: red;
+    color: @red;
 }
 
 /* Batterie-Zustände */
 #battery {
-    color: #a6e3a1; /* Grün für normalen Zustand */
+    color: @green;
 }
 
 #battery.warning {
-    color: #f9e2af; /* Gelb */
+    color: @yellow;
 }
 
 #battery.critical:not(.charging) {
-    color: #f38ba8; /* Rot */
+    color: @red;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;
@@ -45,25 +54,25 @@ window#waybar {
 
 @keyframes blink {
     to {
-        background-color: #f38ba8;
-        color: black;
+        background-color: @red;
+        color: @base;
     }
 }
 
 /* Workspaces / StdinReader Ersatz */
 #workspaces button {
     padding: 0 10px;
-    color: lightgrey;
+    color: @text;
     background: transparent;
 }
 
 #workspaces button.active {
-    color: white;
-    background: #333333; /* Dezentes Grau für den aktiven Workspace */
+    color: @blue;
+    background: @surface1;
 }
 
 #workspaces button.urgent {
-    background-color: #eb4d4b;
+    background-color: @red;
 }
 
 /* Das aktive Fenster in der Mitte */

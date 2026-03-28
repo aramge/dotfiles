@@ -1,12 +1,15 @@
-autoload -U colors && colors
+# Catppuccin Mocha Farben für den Prompt
+local c_blue="#89b4fa"
+local c_green="#a6e3a1"
+local c_red="#f38ba8"
+local c_text="#cdd6f4"
+local c_subtext="#a6adc8"
 
 function git_prompt_info() {
-  # Schneller Abbruch, wenn kein Git-Repo oder kein Branch vorhanden
   git rev-parse --is-inside-work-tree &>/dev/null || return
   local ref=$(git symbolic-ref HEAD 2> /dev/null) || return
   local branch=${ref#refs/heads/}
 
-  # Upstream-Check (KISS: Verhindert Fehlermeldungen bei fehlendem Remote)
   local upstream=$(git rev-parse --abbrev-ref @{u} 2>/dev/null)
   local status_info=""
   
@@ -17,18 +20,18 @@ function git_prompt_info() {
     [ "$behind" -gt 0 ] && status_info+="↓${behind}"
   fi
 
-  echo "%{$fg[blue]%}git:(${branch}${status_info})%{$reset_color%}"
+  echo "%F{$c_blue}git:(${branch}${status_info})%f"
 }
 
 if [ "$UID" -eq 0 ]; then
-  COLOR="%{$fg[red]%}"
+  COLOR="%F{$c_red}"
   SYMBOL="#"
 else
-  COLOR="%{$fg[green]%}"
+  COLOR="%F{$c_green}"
   SYMBOL="$"
 fi
 
-PROMPT="${COLOR}%n%{$reset_color%}%f@%m:%~ ${COLOR}${SYMBOL}%{$reset_color%} "
+PROMPT="${COLOR}%n%f@%F{$c_subtext}%m%f:%F{$c_text}%~ ${COLOR}${SYMBOL}%f "
 RPROMPT='$(git_prompt_info)'
 
 if [[ -n "$TMUX" ]]; then

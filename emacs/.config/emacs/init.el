@@ -116,6 +116,14 @@
   :config
   (which-key-mode))
 
+(use-package catppuccin-theme
+  :ensure t
+  :config
+  ;; Die Flavor direkt auf den ergonomischen Goldstandard setzen
+  (setq catppuccin-flavor 'mocha)
+  ;; Das Theme laden und vertrauen (das 't' verhindert Nachfragen)
+  (load-theme 'catppuccin t))
+
 (use-package clipetty)
 (use-package smartparens
   :hook (prog-mode . smartparens-mode)

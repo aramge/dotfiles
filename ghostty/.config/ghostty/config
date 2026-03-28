@@ -1,6 +1,6 @@
-# Schrift & Größe (Exakt wie Terminal.app)
-font-family = "Menlo"
-font-size = 18
+# Schrift & Größe (Goldstandard für Ergonomie)
+font-family = "JetBrains Mono"
+font-size = 14
 
 # Fenstergröße
 window-width = 120
@@ -14,8 +14,7 @@ macos-option-as-alt = left
 clipboard-write = allow
 
 # Optik (KISS)
-background = #ffffff
-foreground = #000000
+theme = catppuccin-mocha
 window-padding-x = 15
 window-padding-y = 15
 window-decoration = true
