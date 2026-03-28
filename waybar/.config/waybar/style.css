@@ -1,0 +1,72 @@
+/* Globales Reset und Schrift-Setup */
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrainsMono Nerd Font", "Sans";
+    font-size: 16px;
+    min-height: 0;
+}
+
+/* Die gesamte Leiste (entspricht bgColor und position in xmobar) */
+window#waybar {
+    background: black;
+    color: lightgrey;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+/* Module auf der rechten Seite (CPU, Memory, Date, Battery) */
+#cpu, #memory, #clock, #battery {
+    padding: 0 15px;
+}
+
+/* Warnzustand für CPU (entspricht --high red) */
+#cpu.high {
+    color: red;
+}
+
+/* Batterie-Zustände */
+#battery {
+    color: #a6e3a1; /* Grün für normalen Zustand */
+}
+
+#battery.warning {
+    color: #f9e2af; /* Gelb */
+}
+
+#battery.critical:not(.charging) {
+    color: #f38ba8; /* Rot */
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes blink {
+    to {
+        background-color: #f38ba8;
+        color: black;
+    }
+}
+
+/* Workspaces / StdinReader Ersatz */
+#workspaces button {
+    padding: 0 10px;
+    color: lightgrey;
+    background: transparent;
+}
+
+#workspaces button.active {
+    color: white;
+    background: #333333; /* Dezentes Grau für den aktiven Workspace */
+}
+
+#workspaces button.urgent {
+    background-color: #eb4d4b;
+}
+
+/* Das aktive Fenster in der Mitte */
+#window {
+    font-weight: bold;
+}
