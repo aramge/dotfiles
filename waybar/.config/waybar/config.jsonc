@@ -24,12 +24,13 @@
             "critical": 15
         },
         "format": "{icon}  {capacity}%",
-        "format-charging": "  {capacity}%",
+        "format-charging": "  {capacity}%",
         "format-plugged": "  {capacity}%",
+        "format-notcharging": "  {icon}  {capacity}%",
         "format-icons": ["", "", "", "", ""],
         "interval": 60
     },
-
+    
     "cpu": {
         "interval": 10,
         "format": "CPU: {usage}%",
