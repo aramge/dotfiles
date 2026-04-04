@@ -3,9 +3,16 @@
     "position": "top",
     "height": 40,
     "spacing": 4,
-    "modules-left": ["hyprland/workspaces"],
-    "modules-center": ["hyprland/window"],
-    "modules-right": ["battery", "cpu", "memory", "clock"],
+    "modules-left": ["hyprland/workspaces", "hyprland/window"],
+    "modules-center": [],
+    "modules-right": ["battery", "cpu", "memory", "pulseaudio", "group/applets", "clock"],
+
+    "group/applets": {
+        "orientation": "horizontal",
+        "modules": [
+            "tray"
+        ]
+    },
 
     "hyprland/workspaces": {
         "format": "{name}",
@@ -15,6 +22,15 @@
     "hyprland/window": {
         "format": "{title}",
         "separate-outputs": true
+    },
+
+    "pulseaudio": {
+        "format": "Vol: {volume}% {icon}",
+        "format-muted": " Muted",
+        "format-icons": {
+            "default": ["", ""]
+        },
+        "on-click": "pavucontrol"
     },
 
     "battery": {
@@ -30,10 +46,10 @@
         "format-icons": ["", "", "", "", ""],
         "interval": 60
     },
-    
+
     "cpu": {
         "interval": 10,
-        "format": "CPU: {usage}%",
+        "format": "CPU: {usage}%@{avg_frequency:0.1f}",
         "states": {
             "high": 50
         }
@@ -42,6 +58,11 @@
     "memory": {
         "interval": 10,
         "format": "Mem: {percentage}%"
+    },
+
+    "tray": {
+        "icon-size": 18,
+        "spacing": 10
     },
 
     "clock": {

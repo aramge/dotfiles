@@ -13,9 +13,6 @@
 (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
-(setq ring-bell-function 'ignore)
-(setq visible-bell t)
-
 (setq native-comp-async-report-warnings-errors 'silent)
 (column-number-mode 1)
 (setq word-wrap t)
@@ -26,6 +23,9 @@
 
 ;; Disable images in eww
 (setq shr-inhibit-images t)
+
+;;(require 'osc52)
+(osc52-set-cut-function)
 
 (setq ispell-program-name "hunspell")
 (setq ispell-dictionary "de_DE")
@@ -89,17 +89,17 @@
 ;; Pareto-Tipp: Erspare dir das ":ensure t" bei jedem Paket
 (setq use-package-always-ensure t)
 
+(server-start)
+
 ;; --- Pakete ---
 (use-package gptel)
+
 (gptel-make-gemini "Gemini"
 		   :key "AIzaSyCt7SpWXpXvq-6I2g4YeAPDVyIhRefJyo4"
 		   :stream t)
+
 (setq gptel-model 'gemini-3-flash-preview
       gptel-backend (gptel-get-backend "Gemini"))
-
-(use-package clipetty
-  :ensure t
-  :hook (after-init . global-clipetty-mode))
 
 (use-package which-key
   :ensure t
