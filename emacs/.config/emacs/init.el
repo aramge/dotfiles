@@ -1,4 +1,7 @@
 ;;; Axel's emacs configuration (Bootstrap XDG Version)
+(setq frame-resize-pixelwise t)
+;;(add-to-list 'default-frame-alist '(internal-border-width . 0))
+;;(add-to-list 'default-frame-alist '(undecorated . t))
 
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
@@ -68,6 +71,14 @@
 
   (define-key dired-mode-map (kbd "RET") #'dired-ret-external-or-emacs))
 
+;; Verhindert, dass Gnus beim Start öffentliche News-Server sucht
+(setq gnus-select-method '(nnnil ""))
+;; Bindet unser lokales Maildir als Quelle ein
+(setq gnus-secondary-select-methods
+      '((nnmaildir "ramge.de"
+                   (directory "~/Maildir/ramge.de/"))))
+(setq gnus-summary-line-format "%U%R %d %-20,20f  %s\n")
+
 ;; --- Paket-Management & Bootstrapping ---
 (require 'package)
 (setq package-archives
@@ -106,13 +117,19 @@
   :config
   (which-key-mode))
 
-(use-package catppuccin-theme
+;; (use-package catppuccin-theme
+;;   :ensure t
+;;   :config
+;;   ;; Die Flavor direkt auf den ergonomischen Goldstandard setzen
+;;   (setq catppuccin-flavor 'mocha)
+;;   ;; Das Theme laden und vertrauen (das 't' verhindert Nachfragen)
+;;   (load-theme 'catppuccin t))
+
+(use-package modus-themes
   :ensure t
   :config
-  ;; Die Flavor direkt auf den ergonomischen Goldstandard setzen
-  (setq catppuccin-flavor 'mocha)
-  ;; Das Theme laden und vertrauen (das 't' verhindert Nachfragen)
-  (load-theme 'catppuccin t))
+  ;; Lädt das barrierefreie und extrem kontrastreiche Dark-Theme
+  (load-theme 'modus-vivendi t))
 
 (use-package clipetty)
 (use-package smartparens

@@ -6,7 +6,7 @@ path=(
 )
 
 # Editor-Setup
-export EDITOR='emacsclient -t -a ""'
+export EDITOR='emacsclient -t'
 export VISUAL="$EDITOR"
 export SUDO_EDITOR="$EDITOR"
 
@@ -14,6 +14,3 @@ export SUDO_EDITOR="$EDITOR"
 export LANG=en_US.UTF-8
 export LC_MESSAGES=en_US.UTF-8
 export LC_CTYPE=de_DE.UTF-8
-
-# Erzwinge den Pfad zum systemd-Emacs-Socket
-export EMACS_SERVER_FILE="/run/user/$(id -u)/emacs/server"

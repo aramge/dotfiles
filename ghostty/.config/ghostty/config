@@ -3,8 +3,8 @@ font-family = "JetBrains Mono"
 font-size = 14
 
 # Fenstergröße
-window-width = 120
-window-height = 40
+window-width = 80
+window-height = 25
 
 # --- DEIN FIX ---
 # Linke Option-Taste = Meta (für Emacs/tmux)

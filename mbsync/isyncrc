@@ -1,0 +1,25 @@
+IMAPAccount ramge.de
+Host mail.ramge.de
+User axel
+Port 143
+PassCmd "secret-tool lookup Title mail.ramge.de"
+TLSType STARTTLS
+
+IMAPStore ramge.de-remote
+Account ramge.de
+
+MaildirStore ramge.de-local
+Path ~/Maildir/ramge.de/
+Inbox ~/Maildir/ramge.de/INBOX
+SubFolders Verbatim
+
+Channel ramge.de-channel
+Far :ramge.de-remote:
+Near :ramge.de-local:
+Patterns INBOX
+Create Both
+Expunge Both
+SyncState *
+MaxMessages 500
+ExpireUnread yes
+
