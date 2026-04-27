@@ -1,28 +1,21 @@
-# Catppuccin Mocha Farben für den Prompt
+# Farben definieren
 local c_blue="#89b4fa"
 local c_green="#a6e3a1"
 local c_red="#f38ba8"
 local c_text="#cdd6f4"
 local c_subtext="#a6adc8"
 
-function git_prompt_info() {
-  git rev-parse --is-inside-work-tree &>/dev/null || return
-  local ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-  local branch=${ref#refs/heads/}
+# Eingebautes Git-Modul laden
+# autoload -Uz vcs_info
+# zstyle ':vcs_info:*' enable git
+# zstyle ':vcs_info:git:*' formats "%F{$c_blue}git:(%b)%f"
 
-  local upstream=$(git rev-parse --abbrev-ref @{u} 2>/dev/null)
-  local status_info=""
-  
-  if [[ -n "$upstream" ]]; then
-    local ahead=$(git rev-list --count @{u}..HEAD 2>/dev/null || echo 0)
-    local behind=$(git rev-list --count HEAD..@{u} 2>/dev/null || echo 0)
-    [ "$ahead" -gt 0 ] && status_info+="↑${ahead}"
-    [ "$behind" -gt 0 ] && status_info+="↓${behind}"
-  fi
+# Wird nur einmal vor jedem Prompt-Zeichnen ausgeführt
+# precmd() {
+#   vcs_info
+# }
 
-  echo "%F{$c_blue}git:(${branch}${status_info})%f"
-}
-
+# Prompt-Design (KISS)
 if [ "$UID" -eq 0 ]; then
   COLOR="%F{$c_red}"
   SYMBOL="#"
@@ -32,8 +25,9 @@ else
 fi
 
 PROMPT="${COLOR}%n%f@%F{$c_subtext}%m%f:%F{$c_text}%~ ${COLOR}${SYMBOL}%f "
-RPROMPT='$(git_prompt_info)'
+# RPROMPT='${vcs_info_msg_0_}'
 
+# Tmux Fenster-Rename
 if [[ -n "$TMUX" ]]; then
   tmux_preexec() {
     local cmd=(${(z)1})
@@ -44,12 +38,6 @@ if [[ -n "$TMUX" ]]; then
       tmux setw automatic-rename on
     fi
   }
-
-  tmux_precmd() {
-    tmux setw automatic-rename on
-  }
-
   autoload -Uz add-zsh-hook
   add-zsh-hook preexec tmux_preexec
-  add-zsh-hook precmd tmux_precmd
 fi
