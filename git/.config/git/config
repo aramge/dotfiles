@@ -1,15 +1,1 @@
-[user]
-    email = "axel@ramge.de"
-[core]
-    editor = "emacsclient -t"
-    excludesfile = ~/.config/git/ignore
-    autocrlf = input
-
-[pull]
-    rebase = true
-
-[init]
-    defaultBranch = main
-
-[include]
-    path = ~/.gitconfig.local
+/nix/store/0sm8z6hf03nkw30mf9qh6g6rm6bz6zgv-home-manager-files/.config/git/config

@@ -13,6 +13,8 @@
 # OS-Müll
 .DS_Store
 *.stowbak
+*.bak
+*.swp
 
 # Emacs-Müll (Cache, Pakete, Backups)
 **/elpa/
@@ -20,15 +22,16 @@
 **/auto-save-list/
 **/backup-files/
 **/transient/
-**/tramp
+**/tramp/
 **/request/
 **/org-persist/
 **/.#*
+\#*\#
+*~
 **/bookmarks
 **/custom.el
 
 # Zsh-Spezifisches
 **/.zsh_sessions/
 **/.zsh_history
-**/.zcompdump
-zsh/.config/zsh/.zsh_history
+**/.zcompdump*
