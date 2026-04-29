@@ -4,6 +4,7 @@ input {
         xkb {
             layout "de"
             variant "mac_nodeadkeys"
+            options "ctrl:nocaps"
         }
     }
     touchpad {
@@ -13,11 +14,6 @@ input {
     mouse {
         // natural-scroll // Falls du das für die Maus am LG auch willst
     }
-}
-
-// --- OUTPUT (Dein LG Ultragear Fix) ---
-output "Virtual-1" {
-    mode "2560x1440"
 }
 
 // --- LAYOUT (Dein Design & Spaltenverhalten) ---
@@ -44,6 +40,7 @@ layout {
 
 // --- STARTUP ---
 spawn-at-startup "waybar"
+spawn-at-startup "sh" "-c" "~/sync/gh/dotfiles/niri/.config/niri/watchdog.sh"
 
 // --- WINDOW RULES ---
 window-rule {
@@ -76,7 +73,20 @@ binds {
     Mod+Right { focus-column-right; }
     Mod+H     { focus-column-left; }
     Mod+L     { focus-column-right; }
-    
+
+    // --- Monitor-Management (Vertikaler Wechsel LG <-> MBP) ---
+    // Fokus zwischen Monitoren wechseln (nur gucken, nicht anfassen)
+    Mod+Alt+Up    { focus-monitor-up; }
+    Mod+Alt+Down  { focus-monitor-down; }
+    Mod+Alt+K     { focus-monitor-up; }
+    Mod+Alt+J     { focus-monitor-down; }
+
+    // Fenster/Spalten zwischen Monitoren verschieben
+    Mod+Shift+Up    { move-column-to-monitor-up; }
+    Mod+Shift+Down  { move-column-to-monitor-down; }
+    Mod+Shift+K     { move-column-to-monitor-up; }
+    Mod+Shift+J     { move-column-to-monitor-down; }
+
     // Fenster in Spalten aufnehmen oder abstoßen
     // Nutzt die < und > Tasten (bzw. Shift+< für >)
     Mod+less    { consume-or-expel-window-left; }
@@ -116,4 +126,4 @@ binds {
     // Übersicht (Ähnlich wie bei Gnome/Mac)
     Mod+O { toggle-overview; }
 }
- 
+

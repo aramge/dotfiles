@@ -1,0 +1,13 @@
+// Der LG UltraGear oben
+output "HDMI-A-2" {
+    // Wir erzwingen 1440p, damit die 30Hz-Qual aufhört, bis das Kabel da ist
+    mode "2560x1440@59.951" 
+    scale 1.0
+    position x=0 y=0
+}
+
+// Das MacBook Pro Display direkt darunter (zentriert)
+output "eDP-1" {
+    scale 1.75
+    position x=549 y=1440
+}
